@@ -2,11 +2,11 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-public class Client {                                                                                                 
+public class Client {
     Socket socket;
     BufferedReader read;
     PrintWriter output;
-                                                         
+
     Connect c = new Connect();
 
     public class Connect {
@@ -19,7 +19,7 @@ public class Client {
             return this.USERNAME;
         }
     
-        public String getPassword(){                                                                                                             
+        public String getPassword(){
     
             return this.PASSWORD;
         }
@@ -35,10 +35,15 @@ public class Client {
 
     public void startClient() throws UnknownHostException, IOException{
 
+        try{
         Scanner scn = new Scanner(System.in);
 
         //Create socket connection
         socket = new Socket(c.gethostName(), c.getPort());
+
+        while(true)
+
+        {
 
         //create printwriter for sending login to server
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -66,6 +71,12 @@ public class Client {
 
         //display response
         System.out.println(response);
+
+        }
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void fileInfo(){
